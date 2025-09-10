@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Posts Dashboard</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/auth.css" />
+    <link rel="stylesheet" href="styles/dashboard.css" />
+    <link rel="stylesheet" href="styles/posts.css" />
+    <link rel="stylesheet" href="styles/form.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Login Page -->
+      <div id="login-page" class="page">
+        <div class="login-container">
+          <div class="login-card">
+            <div class="login-header">
+              <h1>Posts Dashboard</h1>
+              <p>Sign in to your account</p>
+            </div>
+            <form id="login-form" class="login-form">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+                <span class="error-message" id="email-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required />
+                <span class="error-message" id="password-error"></span>
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <div class="login-help">
+              <p>any valid email and password ≥ 6 characters</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Page -->
+      <div id="dashboard-page" class="page">
+        <div class="dashboard-layout">
+          <!-- Header -->
+          <header class="dashboard-header">
+            <div class="header-content">
+              <h1>Posts Dashboard</h1>
+              <div class="header-actions">
+                <span id="user-info" class="user-info"></span>
+                <button id="logout-btn" class="btn btn-secondary">
+                  Logout
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <!-- Sidebar -->
+          <nav class="dashboard-sidebar">
+            <ul class="nav-menu">
+              <li>
+                <a href="#posts" class="nav-link active" data-route="posts"
+                  >Posts</a
+                >
+              </li>
+              <li>
+                <a href="#create-post" class="nav-link" data-route="create-post"
+                  >Create Post</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Main Content -->
+          <main class="dashboard-main">
+            <!-- Posts Section -->
+            <section id="posts-section" class="content-section active">
+              <div class="section-header">
+                <h2>Posts Management</h2>
+                <button id="create-post-btn" class="btn btn-primary">
+                  Create New Post
+                </button>
+              </div>
+
+              <!-- Search and Filters -->
+              <div class="posts-controls">
+                <div class="search-box">
+                  <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search posts by title or content..."
+                  />
+                </div>
+                <div class="sort-controls">
+                  <select id="sort-field">
+                    <option value="id">Sort by ID</option>
+                    <option value="title">Sort by Title</option>
+                  </select>
+                  <select id="sort-order">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                  </select>
+                </div>
+                <div class="pagination-controls">
+                  <select id="page-size">
+                    <option value="10">10 per page</option>
+                    <option value="25">25 per page</option>
+                    <option value="50">50 per page</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Posts Table -->
+              <div class="posts-table-container">
+                <div id="loading-state" class="loading-state">
+                  <div class="spinner"></div>
+                  <p>Loading posts...</p>
+                </div>
+                <div id="error-state" class="error-state">
+                  <p>Failed to load posts. Please try again.</p>
+                  <button id="retry-btn" class="btn btn-primary">Retry</button>
+                </div>
+                <div id="empty-state" class="empty-state">
+                  <p>No posts found matching your criteria.</p>
+                </div>
+                <div id="posts-table" class="posts-table"></div>
+              </div>
+
+              <!-- Pagination -->
+              <div id="pagination" class="pagination">
+                <button id="prev-page" class="btn btn-secondary" disabled>
+                  Previous
+                </button>
+                <span id="page-info" class="page-info"></span>
+                <button id="next-page" class="btn btn-secondary" disabled>
+                  Next
+                </button>
+              </div>
+            </section>
+
+            <!-- Create/Edit Post Section -->
+            <section id="create-post-section" class="content-section">
+              <div class="section-header">
+                <h2 id="form-title">Create New Post</h2>
+                <button id="back-to-posts" class="btn btn-secondary">
+                  Back to Posts
+                </button>
+              </div>
+
+              <form id="post-form" class="post-form">
+                <div class="form-group">
+                  <label for="post-title">Title *</label>
+                  <input type="text" id="post-title" name="title" required />
+                  <span class="error-message" id="title-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="post-body">Content *</label>
+                  <textarea
+                    id="post-body"
+                    name="body"
+                    rows="6"
+                    required
+                  ></textarea>
+                  <span class="error-message" id="body-error"></span>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">
+                    Save Post
+                  </button>
+                  <button
+                    type="button"
+                    id="reset-form"
+                    class="btn btn-secondary"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    type="button"
+                    id="cancel-form"
+                    class="btn btn-secondary"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
